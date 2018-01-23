@@ -53,7 +53,7 @@ class Edge:
 
 
 
-def main():
+def control_graph():
     C_skip = Command_Exp(lambda x: x, "skip", type="skip")
     B_True=Boolean_Exp(lambda x: True, "true")
     V1 = Vertice(1)
@@ -98,5 +98,12 @@ def main():
     
     Vexit = Vertice("exit")
     Control_Graph = Graph([V1, V2, V3, V4, V5, V6, Vexit])
-    print(Control_Graph)
-    Control_Graph.route({'X':10})
+    return Control_Graph
+
+def apply_path(variables):
+    CG=control_graph()
+    return CG.path(variables)
+
+if __name__=='__main__':
+    CG=control_graph()
+    print(CG.path({'X':10}))
