@@ -83,7 +83,12 @@ if __name__ == "__main__":
     V5.add_next_edge(Edge(B_True, "X:=1", "exit"))
 
     V6 = Vertice(6)
-    V6.add_next_edge(Edge(B_True, "X:=X+1", "exit"))
+    def fun_6(variables):
+        variables['X'] += 1
+        return variables 
+    C6 = Command_Exp(fun_6,"X:=X+1",type="assign")
+    V6.add_next_edge(Edge(B_True, C6, "exit"))
+    
     Vexit = Vertice("exit")
     Control_Graph = Graph([V1, V2, V3, V4, V5, V6, Vexit])
     print(Control_Graph)
