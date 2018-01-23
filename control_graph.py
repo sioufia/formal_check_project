@@ -27,8 +27,8 @@ class Graph:
 
         while current_vertice.label!="exit":
             print(variables, current_vertice.label)
-            next_edge=list(filter(lambda n_e:n_e.evaluate(variables), current_vertice.next_edges))[0]
-            variables=next_edge.execute(variables)
+            next_edge=list(filter(lambda n_e:n_e.cond.evaluate(variables), current_vertice.next_edges))[0]
+            variables=next_edge.com.execute(variables)
             current_vertice=list(filter(lambda vert:vert.label==next_edge.next_label, self.vertices))[0]
 
         print(variables, current_vertice.label)
@@ -99,3 +99,4 @@ if __name__ == "__main__":
     Vexit = Vertice("exit")
     Control_Graph = Graph([V1, V2, V3, V4, V5, V6, Vexit])
     print(Control_Graph)
+    Control_Graph.route({'X':1})
