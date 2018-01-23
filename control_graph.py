@@ -99,4 +99,4 @@ if __name__ == "__main__":
     Vexit = Vertice("exit")
     Control_Graph = Graph([V1, V2, V3, V4, V5, V6, Vexit])
     print(Control_Graph)
-    Control_Graph.route({'X':1})
+    Control_Graph.route({'X':10})
