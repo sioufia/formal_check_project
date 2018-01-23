@@ -22,16 +22,16 @@ class Graph:
 
         return res
 
-    def route(self,variables):
+    def path(self,variables):
+        visited=[]
         current_vertice=self.vertices[0] # First vertice
-
+        visited+=[current_vertice.label]
         while current_vertice.label!="exit":
-            print(variables, current_vertice.label)
             next_edge=list(filter(lambda n_e:n_e.cond.evaluate(variables), current_vertice.next_edges))[0]
             variables=next_edge.com.execute(variables)
             current_vertice=list(filter(lambda vert:vert.label==next_edge.next_label, self.vertices))[0]
-
-        print(variables, current_vertice.label)
+            visited += [current_vertice.label]
+        return visited
 
 class Vertice:
     def __init__(self, label, next_edges=list()):
