@@ -73,14 +73,21 @@ if __name__ == "__main__":
     V3=Vertice(3)
     def fun_3(variables):
         variables['X'] =1-variables['X']
+        return variables
     C3=Command_Exp(fun_3,"X:=1-X", type="assign")
     V3.add_next_edge(Edge(B_True, C3, 4))
 
     V4 = Vertice(4)
-    V4.add_next_edges([Edge("X=1", C_skip, 5), Edge("not(X=1)", C_skip, 6)])
+    B4=Boolean_Exp(lambda vars: vars["X"]==1, "X=1")
+    B4_1=Boolean_Exp(lambda vars: vars["X"]!=1, "not(X=1)")
+    V4.add_next_edges([Edge(B4, C_skip, 5), Edge(B4_1, C_skip, 6)])
 
     V5 = Vertice(5)
-    V5.add_next_edge(Edge(B_True, "X:=1", "exit"))
+    def fun_5(variables):
+        variables['X'] =1
+        return variables
+    C5=Command_Exp(fun_5,"X:=1", type="assign")
+    V5.add_next_edge(Edge(B_True, C5, "exit"))
 
     V6 = Vertice(6)
     def fun_6(variables):
