@@ -22,16 +22,16 @@ class Graph:
 
         return res
 
-    def path(self,variables):
-        visited=[]
+    def route(self,variables):
         current_vertice=self.vertices[0] # First vertice
-        visited+=[current_vertice.label]
+
         while current_vertice.label!="exit":
+            print(variables, current_vertice.label)
             next_edge=list(filter(lambda n_e:n_e.cond.evaluate(variables), current_vertice.next_edges))[0]
             variables=next_edge.com.execute(variables)
             current_vertice=list(filter(lambda vert:vert.label==next_edge.next_label, self.vertices))[0]
-            visited += [current_vertice.label]
-        return visited
+
+        print(variables, current_vertice.label)
 
 class Vertice:
     def __init__(self, label, next_edges=list()):
@@ -53,7 +53,7 @@ class Edge:
 
 
 
-if __name__ == "__main__":
+def main():
     C_skip = Command_Exp(lambda x: x, "skip", type="skip")
     B_True=Boolean_Exp(lambda x: True, "true")
     V1 = Vertice(1)
