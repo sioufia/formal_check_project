@@ -1,5 +1,6 @@
 from boolean_exp import Boolean_Exp
 from command_exp import Command_Exp
+import re
 
 class Graph:
     def __init__(self, vertices):
@@ -37,12 +38,18 @@ class Vertice:
     def __init__(self, label, next_edges=list()):
         self.label = label
         self.next_edges = list(next_edges)
+        self.defv = []
+        self.refv = []
 
     def add_next_edges(self, new_edges):
         self.next_edges += new_edges
 
     def add_next_edge(self, new_edge):
         self.next_edges += [new_edge]
+        if new_edge.com.type == "assign":
+            self.defv.append({new_edge.com.representation.split(":=")[0]})
+        if new_edge.com.type == "skip":
+            pass
 
 
 class Edge:
