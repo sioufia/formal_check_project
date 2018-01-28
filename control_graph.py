@@ -100,6 +100,27 @@ def control_graph():
     Control_Graph = Graph([V1, V2, V3, V4, V5, V6, Vexit])
     return Control_Graph
 
+def control_graph_2():
+    B_True = Boolean_Exp(lambda x: True, "true")
+    B_False = Boolean_Exp(lambda x: False, "false")
+    C_skip = Command_Exp(lambda x: x, "skip", type="skip")
+    V1=Vertice(1)
+    V1.add_next_edge(Edge(B_True,C_skip,2))
+    def fun(variables):
+        variables['X']=3
+        return variables
+    C3=Command_Exp(fun,"X:=3")
+    V1.add_next_edge(Edge(B_False,C3,3))
+
+    V2=Vertice(2)
+    V2.add_next_edge(Edge(B_True,C_skip,"exit"))
+    V3=Vertice(3)
+    V3.add_next_edge(Edge(B_True, C_skip, "exit"))
+
+    Vexit=Vertice("exit")
+    Control_Graph = Graph([V1, V2, V3, Vexit])
+    return Control_Graph
+
 def apply_path(variables):
     CG=control_graph()
     return CG.path(variables)
