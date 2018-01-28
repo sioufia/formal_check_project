@@ -53,7 +53,7 @@ class Edge:
 
 
 
-def control_graph():
+def control_graph_1():
     C_skip = Command_Exp(lambda x: x, "skip", type="skip")
     B_True=Boolean_Exp(lambda x: True, "true")
     V1 = Vertice(1)
@@ -101,30 +101,84 @@ def control_graph():
     return Control_Graph
 
 def control_graph_2():
-    B_True = Boolean_Exp(lambda x: True, "true")
-    B_False = Boolean_Exp(lambda x: False, "false")
     C_skip = Command_Exp(lambda x: x, "skip", type="skip")
-    V1=Vertice(1)
-    V1.add_next_edge(Edge(B_True,C_skip,2))
-    def fun(variables):
-        variables['X']=3
-        return variables
-    C3=Command_Exp(fun,"X:=3")
-    V1.add_next_edge(Edge(B_False,C3,3))
+    B_True=Boolean_Exp(lambda x: True, "true")
+    
+    V1 = Vertice(1)
+    B1 = Boolean_Exp(lambda vars:vars['X']!=vars['Y'], "X!=Y")
+    V1.add_next_edge(Edge(B1, C_skip, 2))
+    B1_1 = Boolean_Exp(lambda vars:vars['X']==vars['Y'], "X=Y")
+    V1.add_next_edge(Edge(B1_1, C_skip, 'exit'))
 
     V2=Vertice(2)
-    V2.add_next_edge(Edge(B_True,C_skip,"exit"))
-    V3=Vertice(3)
-    V3.add_next_edge(Edge(B_True, C_skip, "exit"))
+    B2 = Boolean_Exp(lambda vars:vars['X']>vars['Y'], "X>Y")
+    V2.add_next_edge(Edge(B2, C_skip, 3))
+    B2_2 = Boolean_Exp(lambda vars:vars['X']<=vars['Y'], "X<=Y")
+    V2.add_next_edge(Edge(B2_2, C_skip, 4))
 
-    Vexit=Vertice("exit")
-    Control_Graph = Graph([V1, V2, V3, Vexit])
+    V3=Vertice(3)
+    def fun_3(variables):
+        variables['X'] = variables['X'] - variables['Y']
+        return variables
+    C3=Command_Exp(fun_3,"X=X-Y", type="assign")
+    V3.add_next_edge(Edge(B_True,C3,1))
+
+    V4=Vertice(4)
+    def fun_4(variables):
+        variables['Y'] = variables['Y'] - variables['X']
+        return variables
+    C4=Command_Exp(fun_4,"Y=Y-X", type="assign")
+    V4.add_next_edge(Edge(B_True,C4,1))
+
+    Vexit = Vertice("exit")
+    Control_Graph = Graph([V1, V2, V3, V4, Vexit])
     return Control_Graph
 
+
+def control_graph_3():
+    C_skip = Command_Exp(lambda x: x, "skip", type="skip")
+    B_True = Boolean_Exp(lambda x: True, "true")
+
+    V1 = Vertice(1)
+    B1 = Boolean_Exp(lambda vars: vars['X'] != vars['Y'], "X!=Y")
+    V1.add_next_edge(Edge(B1, C_skip, 2))
+    B1_1 = Boolean_Exp(lambda vars: vars['X'] == vars['Y'], "X=Y")
+    V1.add_next_edge(Edge(B1_1, C_skip, 'exit'))
+
+    V2 = Vertice(2)
+    B2 = Boolean_Exp(lambda vars: vars['X'] > vars['Y'], "X>Y")
+    V2.add_next_edge(Edge(B2, C_skip, 3))
+    B2_2 = Boolean_Exp(lambda vars: vars['X'] <= vars['Y'], "X<=Y")
+    V2.add_next_edge(Edge(B2_2, C_skip, 4))
+
+    V3 = Vertice(3)
+
+    def fun_3(variables):
+        variables['X'] = variables['X'] - variables['Y']
+        return variables
+
+    C3 = Command_Exp(fun_3, "X=X-Y", type="assign")
+    V3.add_next_edge(Edge(B_True, C3, 1))
+
+    V4 = Vertice(4)
+
+    def fun_4(variables):
+        variables['Y'] = variables['Y'] - variables['X']
+        return variables
+
+    C4 = Command_Exp(fun_4, "Y=Y-X", type="assign")
+    V4.add_next_edge(Edge(B_True, C4, 1))
+
+    Vexit = Vertice("exit")
+    Control_Graph = Graph([V1, V2, V3, V4, Vexit])
+    return Control_Graph
+
+
 def apply_path(variables):
-    CG=control_graph()
-    return CG.path(variables)
+    CG=control_graph_2()
+    return CG.path(variables), variables
 
 if __name__=='__main__':
-    CG=control_graph()
-    print(CG.path({'X':10}))
+    CG=control_graph_2()
+    Va = {'X':10, 'Y':3}
+    print(CG.path(Va))
