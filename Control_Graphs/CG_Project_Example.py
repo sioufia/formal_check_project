@@ -65,3 +65,6 @@ if __name__=="__main__":
     CG=CG_Project_Example()
     variables={"X":2}
     print(apply_path(CG,variables))
+    print(CG.vertices[4].__dict__)
+    print(CG.vertices[5].__dict__)
+    print(CG.__dict__)
