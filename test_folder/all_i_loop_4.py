@@ -6,14 +6,11 @@ sys.path.insert(0,sys.path[0][:len(sys.path[0])-12])
 
 from control_graph import apply_path2
 
-def test_path(T, apply_path):
+def test_path(L, T, apply_path):
     #L:list of the paths ; T: data set ; apply_path is a path for a specific prog
-    print(T)
-    L = [[1,2,3,1,"exit"], [1,2,4,1,"exit"]]
     to_visit = list(L)
     for t in T:
         p = apply_path(t)
-        print(p)
         if p in to_visit:
             to_visit.remove(p)
     if to_visit:
@@ -30,9 +27,9 @@ def all_i_loop_passed():
         {'X':5,'Y':10}
         ]
     
-    apply_path = apply_path2
+    L = [[1,2,3,1,"exit"], [1,2,4,1,"exit"]]
 
-    test_path(T, apply_path)
+    test_path(L, T, apply_path2)
 
 def all_i_loop_failed():
     #It fails for i = 1 if X is always the douple of Y
@@ -43,12 +40,12 @@ def all_i_loop_failed():
 
         ]
     
-    apply_path = apply_path2
+    L = [[1,2,3,1,"exit"], [1,2,4,1,"exit"]]
 
-    test_path(T, apply_path)
+    test_path(L, T, apply_path2)
+    
 
 
 all_i_loop_passed()
 all_i_loop_failed()
-
     
