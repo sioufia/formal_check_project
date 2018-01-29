@@ -16,7 +16,7 @@ def CG_dump_loop_simple():
 
     V2 = Vertice(2)
     B2_1 = Boolean_Exp(lambda vars:vars['X']==1,"X=1")
-    V2.add_next_edge(Edge(B2_1, C_skip, "exit"))
+    V2.add_next_edge(Edge(B2_1, C_skip, 4))
     B2_2 = Boolean_Exp(lambda vars:vars['X']!=1,"X!=1")
     V2.add_next_edge(Edge(B2_1, C_skip, 2))
 
@@ -27,10 +27,22 @@ def CG_dump_loop_simple():
     C3 = Command_Exp(func2 , "X:=1", type="assign")
     V3.add_next_edge(Edge(B_True, C3, 2))
 
+    V4 = Vertice(4)
+    def func4(variables):
+        variables['X'] = variables['Y']
+        return variables
+    C4 = Command_Exp(func4 , "X:=Y", type="assign")
+    V4.add_next_edge(Edge(B_True, C4, "exit"))
+
     Vexit = Vertice("exit")
     Control_Graph = Graph([V1,V2,V3,Vexit])
-    Constrol_Graph
+    Control_Graph.add_simple_partial_paths((V1,V4),[{1,2,4},{1,2,3,2,4}])
+    return Control_Graph
 
-    
+    if __name__ == "__main__":
+        CG = CG_dump_loop_simple()
+        print(CG.__dict__)
+        for vert in CG.vertices:
+            print(vert.__dict__)
 
 

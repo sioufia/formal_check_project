@@ -42,8 +42,10 @@ class Graph:
             visited += [current_vertice.label]
         return visited
 
-    def add_simple_partial_paths(self, simple_partial_paths):
-        self.simple_partial_paths += simple_partial_paths
+    def add_simple_partial_paths(self, couple, path):
+        #couple is a tuple (u,v)
+        #path is a list of set
+        self.simple_partial_paths[couple] = path
 
 
 class Vertice:
