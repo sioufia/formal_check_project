@@ -44,3 +44,4 @@ if __name__=="__main__":
     CG=CG_PGCD()
     variables={"X":12,"Y":16}
     print(apply_path(CG,variables))
+    print(CG.__dict__)
