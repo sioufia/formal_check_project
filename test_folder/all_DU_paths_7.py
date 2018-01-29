@@ -1,7 +1,41 @@
 import sys
 sys.path.insert(0,sys.path[0][:len(sys.path[0])-12])
 
+from itertools import product
 from Control_Graphs.CG_Project_Example import CG_Project_Example
 from control_graph import apply_path, find_vertice_with_label
 
-def
+def all_DU_paths(CG, T):
+    for var in CG.var:
+        vert_var_in_defv=set()
+        vert_var_in_refv=set()
+        for vert in CG.vertices:
+            if var in vert.defv:
+                vert_var_in_defv.add(vert.label)
+            elif var in vert.refv:
+                vert_var_in_refv.add(vert.label)
+        couples = product(vert_var_in_defv, vert_var_in_refv)
+        couples_remaining = set(couples)
+        for t in T:
+            path, variables = apply_path(CG, t)
+            for vert_def, vert_ref in couples:
+                vert_def_found = False
+                for vert in path:
+                    if vert_def == vert.label:
+                        vert_found = True
+
+                    elif vert_ref == vert.label and vert_found:
+                        couples_remaining.remove((vert_def, vert_ref))
+                        break
+
+                    elif vert_ref != vert.label and var in vert.refv:
+                        print('Test failed')
+                        return False
+
+        if couples_remaining:
+            print('Test failed')
+            print(couples_remaining, var)
+            return False
+
+    print('Test passed')
+    return True
