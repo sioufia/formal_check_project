@@ -32,15 +32,16 @@ class Graph:
         return res
 
     def path(self, variables):
+        new_variables=dict(variables)
         visited = []
         current_vertice = self.vertices[0]  # First vertice
         visited += [current_vertice.label]
         while current_vertice.label != "exit":
-            next_edge = list(filter(lambda n_e: n_e.condition.evaluate(variables), current_vertice.next_edges))[0]
-            variables = next_edge.command.execute(variables)
+            next_edge = list(filter(lambda n_e: n_e.condition.evaluate(new_variables), current_vertice.next_edges))[0]
+            new_variables = next_edge.command.execute(new_variables)
             current_vertice = list(filter(lambda vert: vert.label == next_edge.next_label, self.vertices))[0]
             visited += [current_vertice.label]
-        return visited
+        return visited, new_variables
 
     def add_simple_partial_paths(self, couple, path):
         #couple is a tuple (u,v)
@@ -78,7 +79,7 @@ class Edge:
 
 
 def apply_path(CG, variables):
-    return CG.path(variables), variables
+    return CG.path(variables)
 
 
 def find_vertice_with_label(CG, label):
