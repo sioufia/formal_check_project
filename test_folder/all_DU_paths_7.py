@@ -20,7 +20,6 @@ def all_DU_paths(CG, T):
         for t in T:
             path, variables = apply_path(CG, t)
             for vert_def, vert_ref in couples:
-
                 vert_found = False
                 for vert in path:
                     if vert_def == vert.label:
