@@ -35,7 +35,7 @@ def CG_dumb_loop_simple():
     V4.add_next_edge(Edge(B_True, C4, "exit"))
 
     Vexit = Vertice("exit")
-    Control_Graph = Graph([V1,V2,V3,Vexit])
+    Control_Graph = Graph([V1,V2,V3,V4,Vexit])
     Control_Graph.add_simple_partial_paths((V1.label,V4.label),[[1,2,4,"exit"],[1,2,3,2,4,"exit"]])
     Control_Graph.add_simple_partial_paths((V3.label,V2.label),[[1,2,3,2,4,"exit"],[1,2,3,2,3,2,4,"exit"]])
     return Control_Graph

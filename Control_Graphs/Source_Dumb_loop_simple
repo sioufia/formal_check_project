@@ -1,4 +1,6 @@
 1: Y:=1
 2: while not(X=1)
 do{3: X=X-1}
-4: X:=Y
+4: if Y=1
+then{}
+else{}
