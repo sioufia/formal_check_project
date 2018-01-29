@@ -1,5 +1,4 @@
-Reprise du programme de l'exercice 3
-
+/ PGCG
 while 1:not(X=Y) do{
     if 2:X>Y
     then {3:X:=X-Y}

@@ -1,5 +1,6 @@
 class Command_Exp:
     TYPES=["skip","assign"]
+
     def __init__(self,function_to_execute,representation,type):
         self.to_execute=function_to_execute
         self.representation=representation
