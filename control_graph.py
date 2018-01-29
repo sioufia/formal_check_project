@@ -10,6 +10,7 @@ class Graph:
         self.labels = set()
         self.var = set()
         self.add_vertices(vertices)
+        self.intermediary_loop=[]
 
     def add_vertices(self, new_vertices):
         for vert in new_vertices:
@@ -40,6 +41,9 @@ class Graph:
             current_vertice = list(filter(lambda vert: vert.label == next_edge.next_label, self.vertices))[0]
             visited += [current_vertice.label]
         return visited
+
+    def add_intermediary_loop(self, loops):
+        self.intermediary_loop=loops
 
 
 class Vertice:
