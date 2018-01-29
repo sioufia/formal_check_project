@@ -10,6 +10,7 @@ class Graph:
         self.labels = set()
         self.var = set()
         self.add_vertices(vertices)
+        self.simple_partial_paths = {}
 
     def add_vertices(self, new_vertices):
         for vert in new_vertices:
@@ -41,6 +42,9 @@ class Graph:
             visited += [current_vertice.label]
         return visited
 
+    def add_simple_partial_paths(self, simple_partial_paths):
+        self.simple_partial_paths += simple_partial_paths
+
 
 class Vertice:
     def __init__(self, label, next_edges=list()):
@@ -61,7 +65,7 @@ class Vertice:
             self.defv.add(re.findall(r'[a-zA-Z]+', new_edge.command.representation)[0])
             self.refv |= set(re.findall(r'[a-zA-Z]+', new_edge.command.representation)[1:])
         self.refv |= set(re.findall(r'[a-zA-Z]+', new_edge.condition.representation))
-        self.refv -= set(["true", "false","not"])
+        self.refv -= set(["true", "false", "not"])
 
 
 class Edge:
