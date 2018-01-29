@@ -16,7 +16,7 @@ def all_DU_paths(CG, T):
             elif var in vert.refv:
                 vert_var_in_refv.add(vert.label)
         couples = product(vert_var_in_defv, vert_var_in_refv)
-        paths_remaining=set(CG.simple_partial_paths[(vert_def,vert_ref)] for (vert_def,vert_ref) in couples)
+        paths_remaining=list(CG.simple_partial_paths[(vert_def,vert_ref)] for (vert_def,vert_ref) in couples)
         for t in T:
             path, variables = apply_path(CG, t)
             for vert_def, vert_ref in couples:
@@ -27,7 +27,7 @@ def all_DU_paths(CG, T):
                         vert_found = True
 
                     elif vert_ref == vert.label and vert_found:
-                        paths_remaining.discard(path)
+                        paths_remaining.remove(path)
                         break
 
                     elif vert_ref != vert.label and var in vert.refv:
@@ -45,9 +45,7 @@ def all_DU_paths(CG, T):
 if  __name__=="__main__":
     CG=CG_dumb_loop_simple()
     T=[
-        {'X':1},
-        {'X':-1},
-        {'X':-10}
+        {'X':1}
     ]
     print('Dumb Loop Simple')
     all_DU_paths(CG, T)

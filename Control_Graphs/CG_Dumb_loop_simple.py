@@ -28,14 +28,13 @@ def CG_dumb_loop_simple():
     V3.add_next_edge(Edge(B_True, C3, 2))
 
     V4 = Vertice(4)
-    def func4(variables):
-        variables['X'] = variables['Y']
-        return variables
-    C4 = Command_Exp(func4 , "X:=Y", type="assign")
-    V4.add_next_edge(Edge(B_True, C4, "exit"))
+    B4_1 = Boolean_Exp(lambda vars:vars['Y']==1 ,"Y=1")
+    B4_2 = Boolean_Exp(lambda vars:vars['Y']!=1 ,"Y!=1")
+    V4.add_next_edge(Edge(B4_1, C_skip, "exit"))
+    V4.add_next_edge(Edge(B4_2, C_skip, "exit"))
 
     Vexit = Vertice("exit")
-    Control_Graph = Graph([V1,V2,V3,Vexit])
+    Control_Graph = Graph([V1,V2,V3,V4,Vexit])
     Control_Graph.add_simple_partial_paths((V1.label,V4.label),[[1,2,4,"exit"],[1,2,3,2,4,"exit"]])
     Control_Graph.add_simple_partial_paths((V3.label,V2.label),[[1,2,3,2,4,"exit"],[1,2,3,2,3,2,4,"exit"]])
     return Control_Graph
