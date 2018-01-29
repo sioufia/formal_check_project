@@ -2,16 +2,16 @@ from control_graph import Graph, Vertice, Edge, apply_path
 from boolean_exp import Boolean_Exp
 from command_exp import Command_Exp
 
-def CG_dump_loop_simple():
+def CG_dumb_loop_simple():
     "Create a graphe with simple intermediary loop for question 7"
     C_skip = Command_Exp(lambda x: x, "skip", type="skip")
     B_True = Boolean_Exp(lambda x: True, "true")
     
     V1 = Vertice(1)
     def func1(variables):
-        variables['X'] = 1
+        variables['Y'] = 1
         return variables
-    C1 = Command_Exp(func1, "X:=1", type="assign")
+    C1 = Command_Exp(func1, "Y:=1", type="assign")
     V1.add_next_edge(Edge(B_True, C1, 2))
 
     V2 = Vertice(2)
@@ -36,7 +36,7 @@ def CG_dump_loop_simple():
 
     Vexit = Vertice("exit")
     Control_Graph = Graph([V1,V2,V3,Vexit])
-    Control_Graph.add_simple_partial_paths((V1,V4),[{1,2,4},{1,2,3,2,4}])
+    Control_Graph.add_simple_partial_paths((V1.label,V4.label),[{1,2,4},{1,2,3,2,4}])
     return Control_Graph
 
     if __name__ == "__main__":

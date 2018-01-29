@@ -3,7 +3,7 @@ sys.path.insert(0,sys.path[0][:len(sys.path[0])-12])
 
 from itertools import product
 from Control_Graphs.CG_Project_Example import CG_Project_Example
-from Control_Graphs.CG_Dumb_loop_simple import CG_Dumb_loop_simple
+from Control_Graphs.CG_Dumb_loop_simple import CG_dumb_loop_simple
 from control_graph import apply_path, find_vertice_with_label
 
 def all_DU_paths(CG, T):
@@ -43,7 +43,7 @@ def all_DU_paths(CG, T):
     return True
 
 if  __name__=="__main__":
-    CG=CG_Dumb_loop_simple()
+    CG=CG_dumb_loop_simple()
     T=[
         {'X':1},
         {'X':-1},
