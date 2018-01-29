@@ -4,7 +4,7 @@ sys.path.insert(0,sys.path[0][:len(sys.path[0])-12])
 from itertools import product
 
 from Control_Graphs.CG_Project_Example import CG_Project_Example
-from Control_Graphs.CG_PGCD import CG_PGCD
+from Control_Graphs.CG_Dumb import CG_Dumb
 from control_graph import apply_path, find_vertice_with_label
 
 def all_usages(CG,T):
@@ -54,11 +54,11 @@ if  __name__=="__main__":
     print('Project Example')
     all_usages(CG,T)
 
-    CG=CG_PGCD()
+    CG=CG_Dumb()
     T=[
         {'X':100, 'Y':5},
         {'X':5, 'Y':100}
     ]
-    print('PGCD')
+    print('Dumb')
     all_usages(CG,T)
 
