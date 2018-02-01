@@ -1,15 +1,25 @@
 class Command_Exp:
     TYPES=["skip","assign"]
 
-    def __init__(self,function_to_execute,representation,type):
+    @staticmethod
+    def identite(x):
+        return x
+
+    def __init__(self,function_to_execute,representation,type, reverse_fun=None):
         self.to_execute=function_to_execute
         self.representation=representation
         if type in Command_Exp.TYPES:
             self.type=type
+        if reverse_fun is None:
+            reverse_fun=Command_Exp.identite
+        self.reverse_fun=reverse_fun
+
 
     def execute(self,variables):
         return self.to_execute(variables)
 
+    def reverse_execute(self, variables):
+        return self.reverse_fun(variables)
 
     def __repr__(self):
         return self.representation

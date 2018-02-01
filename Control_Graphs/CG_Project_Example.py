@@ -20,6 +20,7 @@ def CG_Project_Example():
         return variables
 
     C2 = Command_Exp(fun_2, "X:=-X", type="assign")
+    C2.reverse_fun=fun_2
     V2.add_next_edge(Edge(B_True, C2, 4))
 
 
@@ -30,6 +31,7 @@ def CG_Project_Example():
         return variables
 
     C3 = Command_Exp(fun_3, "X:=1-X", type="assign")
+    C3.reverse_fun(fun_3)
     V3.add_next_edge(Edge(B_True, C3, 4))
 
     V4 = Vertice(4)
@@ -52,7 +54,12 @@ def CG_Project_Example():
         variables['X'] += 1
         return variables
 
+    def reverse_fun_6(variables):
+        variables['X']-=1
+        return variables
+
     C6 = Command_Exp(fun_6, "X:=X+1", type="assign")
+    C6.reverse_fun(reverse_fun_6)
     V6.add_next_edge(Edge(B_True, C6, "exit"))
 
     Vexit = Vertice("exit")
