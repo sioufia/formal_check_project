@@ -11,6 +11,7 @@ class Graph:
         self.var = set()
         self.add_vertices(vertices)
         self.simple_partial_paths = {}
+        self.visited_from_data_set = []
 
     def add_vertices(self, new_vertices):
         for vert in new_vertices:
@@ -36,6 +37,7 @@ class Graph:
         current_vertice = self.vertices[0]  # First vertice
         visited += [current_vertice.label]
         while current_vertice.label != "exit":
+            #print(current_vertice.label)
             next_edge = list(filter(lambda n_e: n_e.condition.evaluate(variables), current_vertice.next_edges))[0]
             variables = next_edge.command.execute(variables)
             current_vertice = list(filter(lambda vert: vert.label == next_edge.next_label, self.vertices))[0]
@@ -46,6 +48,31 @@ class Graph:
         #couple is a tuple (u,v)
         #path is a list of set
         self.simple_partial_paths[couple] = path
+
+    def coverage_criteria(self, T):
+        """It calculates the ratio between the number of vertices visited and the number total
+        of vertices"""
+        #T is a dataset 
+        #print(T)
+        variables_init = T
+        for variables in T:
+            #print(variables)
+            variable1=dict(variables)
+            p = self.path(variable1)
+            #print(p)
+            for elt in p:
+                if elt not in self.visited_from_data_set:
+                    self.visited_from_data_set.append(elt)
+        
+        nb_vertices = len(self.vertices)
+        if nb_vertices != 0:
+            vertices_label = [x.label for x in self.vertices]
+            print("Coverage : {}".format(len(self.visited_from_data_set)/nb_vertices ))
+            print("Vertices of the graph: {}".format(str(vertices_label)))
+            print("Vertices visited : {}".format(str(self.visited_from_data_set)))
+        else:
+            raise ValueError("No vertices in this data set")
+
 
 
 class Vertice:
