@@ -16,28 +16,40 @@ def all_DU_paths(CG, T):
             elif var in vert.refv:
                 vert_var_in_refv.add(vert.label)
         couples = product(vert_var_in_defv, vert_var_in_refv)
+<<<<<<< HEAD
         paths_remaining=list(CG.simple_partial_paths[(vert_def,vert_ref)] for (vert_def,vert_ref) in couples)
         for t in T:
             path, variables = apply_path(CG, t)
             print(path)
             for vert_def, vert_ref in couples:
+=======
+        for vert_def, vert_ref in couples:
+            paths_remaining = list(CG.simple_partial_paths[(vert_def, vert_ref)])
+            for t in T:
+                path, variables = apply_path(CG, t)
+>>>>>>> f26e76aa5a1f1f92d441ef4e758876a8cd9c43bc
                 vert_found = False
-                for vert in path:
-                    if vert_def == vert.label:
+                for label in path:
+                    cur_vertice=find_vertice_with_label(CG,label)
+                    if vert_def == label:
                         vert_found = True
 
-                    elif vert_ref == vert.label and vert_found:
-                        paths_remaining.remove(path)
+                    elif vert_ref == label and vert_found:
+                        if path in paths_remaining:
+                            paths_remaining.remove(path)
                         break
 
-                    elif vert_ref != vert.label and var in vert.refv:
+                    elif vert_ref != label and var in cur_vertice.refv:
                         print('Test failed')
+                        print(paths_remaining, var,vert_def, vert_ref, path)
                         return False
 
         if paths_remaining:
             print('Test failed')
-            print(paths_remaining, var)
+            print(paths_remaining, var, vert_def, vert_ref, path)
             return False
+
+
 
     print('Test passed')
     return True
@@ -45,6 +57,11 @@ def all_DU_paths(CG, T):
 if  __name__=="__main__":
     CG=CG_dumb_loop_simple()
     T=[
+<<<<<<< HEAD
+=======
+        {'X':1},
+        {'X':2},
+>>>>>>> f26e76aa5a1f1f92d441ef4e758876a8cd9c43bc
         {'X':3}
     ]
     print('Dumb Loop Simple')
