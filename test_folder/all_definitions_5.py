@@ -32,7 +32,9 @@ def all_definitions(CG, T):
             return False
 
     print('Test passed')
-    return True, a
+    CG.coverage_criteria(T)
+
+    return True
 
 
 if __name__ == "__main__":
@@ -41,6 +43,4 @@ if __name__ == "__main__":
         {'X': 1},
         {'X':-1}
     ]
-    a = all_definitions(CG, T)
-    if a:
-        print (CG.coverage_criteria(T, a))
+    all_definitions(CG, T)

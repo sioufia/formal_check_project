@@ -49,7 +49,7 @@ def all_i_loop_failed(CG):
 
 if  __name__=="__main__":
     CG1=CG_PGCD()
-    #CG2=CG_PGCD()
+    CG2=CG_PGCD()
     all_i_loop_passed(CG1)
-    #all_i_loop_failed(CG2)
+    all_i_loop_failed(CG2)
     

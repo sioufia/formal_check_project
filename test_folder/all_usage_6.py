@@ -41,6 +41,7 @@ def all_usages(CG,T):
             return False
 
     print('Test passed')
+    CG.coverage_criteria(T)
     return True
 
 
@@ -59,6 +60,6 @@ if  __name__=="__main__":
         {'X':100, 'Y':5},
         {'X':5, 'Y':100}
     ]
-    
+
     all_usages(CG,T)
 

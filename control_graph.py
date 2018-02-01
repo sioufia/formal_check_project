@@ -53,13 +53,8 @@ class Graph:
         """It calculates the ratio between the number of vertices visited and the number total
         of vertices"""
         #T is a dataset 
-        #print(T)
-        variables_init = T
         for variables in T:
-            #print(variables)
-            variable1=dict(variables)
-            p = self.path(variable1)
-            #print(p)
+            p = self.path(variables)[0]
             for elt in p:
                 if elt not in self.visited_from_data_set:
                     self.visited_from_data_set.append(elt)
