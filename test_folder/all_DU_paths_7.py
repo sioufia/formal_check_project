@@ -19,6 +19,7 @@ def all_DU_paths(CG, T):
         paths_remaining=list(CG.simple_partial_paths[(vert_def,vert_ref)] for (vert_def,vert_ref) in couples)
         for t in T:
             path, variables = apply_path(CG, t)
+            print(path)
             for vert_def, vert_ref in couples:
                 vert_found = False
                 for vert in path:
@@ -44,7 +45,7 @@ def all_DU_paths(CG, T):
 if  __name__=="__main__":
     CG=CG_dumb_loop_simple()
     T=[
-        {'X':1}
+        {'X':3}
     ]
     print('Dumb Loop Simple')
     all_DU_paths(CG, T)

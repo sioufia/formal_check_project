@@ -15,6 +15,7 @@ def test(CG,L,T):
         return False
     else:
         print('test passed')
+        CG.coverage_criteria(T)
         return True
 
 if __name__=="__main__":

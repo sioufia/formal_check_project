@@ -59,6 +59,6 @@ if  __name__=="__main__":
         {'X':100, 'Y':5},
         {'X':5, 'Y':100}
     ]
-    print('Dumb')
+    
     all_usages(CG,T)
 
