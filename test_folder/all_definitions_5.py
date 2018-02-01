@@ -13,6 +13,7 @@ def all_definitions(CG, T):
             if var in vert.defv:
                 vert_var_in_defv.add(vert.label)
         vert_to_visit = set(vert_var_in_defv)
+        a = vert_to_visit
 
         for t in T:
             path, variables = apply_path(CG, t)
@@ -31,6 +32,8 @@ def all_definitions(CG, T):
             return False
 
     print('Test passed')
+    CG.coverage_criteria(T)
+
     return True
 
 

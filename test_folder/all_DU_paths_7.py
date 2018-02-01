@@ -44,6 +44,7 @@ def all_DU_paths(CG, T):
 
 
     print('Test passed')
+    CG.coverage_criteria(T)
     return True
 
 if  __name__=="__main__":

@@ -4,23 +4,25 @@
 import sys
 sys.path.insert(0,sys.path[0][:len(sys.path[0])-12])
 
-from control_graph import apply_path
+from Control_Graphs.CG_Project_Example import CG_Project_Example
+from control_graph import apply_path, find_vertice_with_label
 
-def test_path(L, T, apply_path):
+def all_conditions(CG, L, T):
     #L:list of the paths ; T: data set ; apply_path is a path for a specific prog
     to_visit = list(L)
     for t in T:
-        p = apply_path(t)
+        p = apply_path(CG, t)[0]
         if p in to_visit:
             to_visit.remove(p)
     if to_visit:
         print('test failed')
     else:
         print('test passed')
+        CG.coverage_criteria(T)
 
 
 
-def all_conditions_passed():
+def all_conditions_passed(CG):
 
     T = [
         {'X':-1},
@@ -29,9 +31,9 @@ def all_conditions_passed():
     
     L = [[1,2,4,5,"exit"], [1,3,4,6,"exit"]]
 
-    test_path(L, T, apply_path)
+    all_conditions(CG, L, T)
 
-def all_conditions_failed():
+def all_conditions_failed(CG):
     #A requirement to pass the test is to have X=-1 as initial value
     T = [
         {'X':-5}
@@ -39,10 +41,12 @@ def all_conditions_failed():
 
     L = [[1,2,4,5,"exit"], [1,3,4,6,"exit"]]
 
-    test_path(L, T, apply_path)
+    all_conditions(CG, L, T)
 
-
-all_conditions_passed()
-all_conditions_failed()
+if __name__=="__main__":
+    Control_Graph1 = CG_Project_Example()
+    Control_Graph2 = CG_Project_Example()  
+    all_conditions_passed(Control_Graph1)
+    all_conditions_failed(Control_Graph2)
 
     
