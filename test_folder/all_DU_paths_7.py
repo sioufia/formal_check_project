@@ -4,9 +4,11 @@ sys.path.insert(0,sys.path[0][:len(sys.path[0])-12])
 from itertools import product
 from Control_Graphs.CG_Project_Example import CG_Project_Example
 from Control_Graphs.CG_Dumb_loop_simple import CG_dumb_loop_simple
-from control_graph import apply_path, find_vertice_with_label
+from control_graph import apply_path, find_vertice_with_label, Graph
 
 def all_DU_paths(CG, T):
+    path_to_visit = []
+    path_not_visited = []
     for var in CG.var:
         vert_var_in_defv=set()
         vert_var_in_refv=set()
@@ -17,7 +19,9 @@ def all_DU_paths(CG, T):
                 vert_var_in_refv.add(vert.label)
         couples = product(vert_var_in_defv, vert_var_in_refv)
         for vert_def, vert_ref in couples:
-            paths_remaining = list(CG.simple_partial_paths[(vert_def, vert_ref)])
+            #paths_remaining = list(CG.simple_partial_paths[(vert_def, vert_ref)])
+            path_to_visit += list(CG.simple_partial_paths[(vert_def, vert_ref)])
+            path_not_visited += list(CG.simple_partial_paths[(vert_def, vert_ref)])
             for t in T:
                 path, variables = apply_path(CG, t)
                 vert_found = False
@@ -27,25 +31,29 @@ def all_DU_paths(CG, T):
                         vert_found = True
 
                     elif vert_ref == label and vert_found:
-                        if path in paths_remaining:
-                            paths_remaining.remove(path)
+                        if path in path_not_visited:
+                            path_not_visited.remove(path)
                         break
 
                     elif vert_ref != label and var in cur_vertice.refv:
-                        print('Test failed')
-                        print(paths_remaining, var,vert_def, vert_ref, path)
-                        return False
+                        break
+                        #print('Test failed')
+                        #print(paths_remaining, var,vert_def, vert_ref, path)
+                        #return False
 
-        if paths_remaining:
-            print('Test failed')
-            print(paths_remaining, var, vert_def, vert_ref, path)
-            return False
+        #if paths_remaining:
+        #    print('Test failed')
+        #    print(paths_remaining, var, vert_def, vert_ref, path)
+        #    return False
 
-
-
-    print('Test passed')
-    CG.coverage_criteria(T)
-    return True
+    Graph.coverage_criteria2(path_to_visit, "not_visited", path_not_visited)
+    if path_not_visited:
+        print('Test failed')
+    
+    else:
+        print('Test passed')
+        #CG.coverage_criteria(T)
+        return True
 
 if  __name__=="__main__":
     CG=CG_dumb_loop_simple()

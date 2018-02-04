@@ -2,7 +2,7 @@ import sys
 sys.path.insert(0,sys.path[0][:len(sys.path[0])-12])
 
 from Control_Graphs.CG_Project_Example import CG_Project_Example
-from control_graph import apply_path, find_vertice_with_label
+from control_graph import apply_path, find_vertice_with_label, Graph
 
 def all_decisions(CG,L,T):
     to_visit = list(L)
@@ -11,11 +11,12 @@ def all_decisions(CG,L,T):
         path_visited = apply_path(CG,t)[0]
         edge_visited = set((path_visited[i], path_visited[i + 1]) for i in range(len(path_visited) - 1))
         visited |= edge_visited
+    Graph.coverage_criteria2(to_visit, "visited" ,visited.intersection(to_visit))
     if L - visited:
         print('test failed')
     else:
         print('test passed')
-        CG.coverage_criteria(T)
+        #CG.coverage_criteria(T)
 
 
 if __name__=="__main__":

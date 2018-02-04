@@ -68,6 +68,25 @@ class Graph:
         else:
             raise ValueError("No vertices in this data set")
 
+    @staticmethod
+    def coverage_criteria2(to_visit, type_numerator, numerator):
+        """It calculates the ratio between the elements that have been visited and the all the elements of the criteria
+        that should be visited
+        - to_visit is a list of the elements that cover the criteria
+        - not_visited is a list of the elements from to_visit that have not been visited
+        """
+        if to_visit:
+            print("to_visit : {} ".format(to_visit))
+            if type_numerator == "not_visited":
+                print("not_visited : {} ".format(numerator))
+                print ("Coverage criteria : {}".format(1 - (len(numerator) / len(to_visit)) ))
+            elif type_numerator == "visited":
+                print("visited : {} ".format(numerator))
+                print ("Coverage criteria : {}".format(len(numerator) / len(to_visit)))
+
+        else:
+            raise ValueError('to_visit is empty')
+
 
 
 class Vertice:

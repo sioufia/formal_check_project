@@ -14,7 +14,7 @@ def CG_Dumb():
         variables['X'] = 1
         return variables
 
-    C1 = Command_Exp(fun_1, "X=1",type="assign")
+    C1 = Command_Exp(fun_1, "X:=1",type="assign")
     V1.add_next_edge(Edge(B_True, C1, 2))
 
     V2 = Vertice(2)
@@ -23,7 +23,7 @@ def CG_Dumb():
         variables['Y'] = variables['X'] + 1
         return variables
 
-    C2 = Command_Exp(fun_2, "Y=X+1",type="assign")
+    C2 = Command_Exp(fun_2, "Y:=X+1",type="assign")
     V2.add_next_edge(Edge(B_True, C_skip, "exit"))
 
     Vexit = Vertice("exit")

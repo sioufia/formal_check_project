@@ -2,20 +2,23 @@ import sys
 sys.path.insert(0,sys.path[0][:len(sys.path[0])-12])
 
 from Control_Graphs.CG_Project_Example import CG_Project_Example
-from control_graph import apply_path
+from control_graph import apply_path, Graph
 
 def test(CG,L,T):
     to_visit = list(L)
+    not_visited = list(L)
     for t in T:
-        p = apply_path(CG,t)
-        if p in to_visit:
-            to_visit.remove(p)
-    if to_visit:
+        p = apply_path(CG,t)[0]
+        if p in not_visited:
+            not_visited.remove(p)
+    
+    Graph.coverage_criteria2(to_visit, "not_visited", not_visited)
+    if not_visited:
         print('test failed')
         return False
     else:
         print('test passed')
-        CG.coverage_criteria(T)
+        #CG.coverage_criteria(T)
         return True
 
 if __name__=="__main__":

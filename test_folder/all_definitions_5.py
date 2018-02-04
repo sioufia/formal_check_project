@@ -3,7 +3,7 @@ import sys
 sys.path.insert(0, sys.path[0][:len(sys.path[0]) - 12])
 
 from Control_Graphs.CG_Project_Example import CG_Project_Example
-from control_graph import apply_path, find_vertice_with_label
+from control_graph import apply_path, find_vertice_with_label, Graph
 
 
 def all_definitions(CG, T):
@@ -13,7 +13,7 @@ def all_definitions(CG, T):
             if var in vert.defv:
                 vert_var_in_defv.add(vert.label)
         vert_to_visit = set(vert_var_in_defv)
-        a = vert_to_visit
+        vert_not_visited = set(vert_var_in_defv)
 
         for t in T:
             path, variables = apply_path(CG, t)
@@ -25,14 +25,16 @@ def all_definitions(CG, T):
                         def_vert_visited = True
                         continue
                     if var in cur_vertice.refv and def_vert_visited:
-                        vert_to_visit.remove(definition_vert)
+                        vert_not_visited.remove(definition_vert)
                         break
-        if vert_to_visit:
+                    
+        Graph.coverage_criteria2(vert_to_visit, "not_visited", vert_not_visited)
+        if vert_not_visited:
             print('Test failed')
             return False
 
     print('Test passed')
-    CG.coverage_criteria(T)
+    #CG.coverage_criteria(T)
 
     return True
 

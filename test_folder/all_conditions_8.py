@@ -5,20 +5,22 @@ import sys
 sys.path.insert(0,sys.path[0][:len(sys.path[0])-12])
 
 from Control_Graphs.CG_Project_Example import CG_Project_Example
-from control_graph import apply_path, find_vertice_with_label
+from control_graph import apply_path, find_vertice_with_label, Graph
 
 def all_conditions(CG, L, T):
     #L:list of the paths ; T: data set ; apply_path is a path for a specific prog
     to_visit = list(L)
+    not_visited = list(L)
     for t in T:
         p = apply_path(CG, t)[0]
-        if p in to_visit:
-            to_visit.remove(p)
-    if to_visit:
+        if p in not_visited:
+            not_visited.remove(p)
+    Graph.coverage_criteria2(to_visit, "not_visited", not_visited)
+    if not_visited:
         print('test failed')
     else:
         print('test passed')
-        CG.coverage_criteria(T)
+        #CG.coverage_criteria(T)
 
 
 
