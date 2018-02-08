@@ -17,7 +17,8 @@ that validate the criteria for a specific program.
 
 - ./command_exp.py : it contains the class representing the command expression (assignement, loop, skip)
 
-- ./test_generation.py : the automatic generation of data set that validate a critera for a specific WHILE programm
+- ./test_generation.py : the automatic generation of data set that validate a critera for a specific WHILE programm. 
+Currently it finds the data set for a programm with only one variable.
 
 - ./constraint_programming.py : a solver made by Professor Dürr during the class of Optimization
 
