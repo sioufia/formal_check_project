@@ -4,6 +4,7 @@ sys.path.insert(0,sys.path[0][:len(sys.path[0])-12])
 
 from Control_Graphs.CG_Project_Example import CG_Project_Example
 from control_graph import apply_path, Graph
+from test_generation import test_generation
 
 def all_4_paths(CG,L,T):
     """The arguments are a control graph (CG), the list of paths that should 
@@ -51,6 +52,16 @@ def all_4_paths_failed(CG):
 
     all_4_paths(CG, L, T)
 
+def generate_data_set(CG):
+    L = [
+        [1, 2, 4, 5, "exit"], 
+        [1, 3, 4, 5, "exit"], 
+        [1, 2, 4, 6, "exit"], 
+        [1, 3, 4, 6, "exit"]
+        ] 
+    for path in L:
+        print(test_generation(CG,path))
+
 if __name__=="__main__":
     print("Criteria 2 - all 4 paths")
     print("Control Graph is CG_Project_Example")
@@ -60,3 +71,6 @@ if __name__=="__main__":
     all_4_paths_passed(CG1)
     print("\n")
     all_4_paths_failed(CG2)
+    print("\n")
+    print("Automatic generation of data set that validate the criteria:")
+    generate_data_set(CG1)
