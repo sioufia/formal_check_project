@@ -1,0 +1,9 @@
+Steps to run the criterias with manual generation data:
+    1/ Go to the folder ./test_folder
+    2/ Launch the file corresponding to the criteria
+    you want : python <name_of_file>
+    For each file there are :
+        - 1 passed test (with a control graph and a dataset)
+        - 1 failed test (with a control graph and a dataset)
+        - 1 generation of dataset for the criteria (only for criterias 
+        1,2,3 and 8)
