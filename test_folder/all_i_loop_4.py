@@ -54,8 +54,12 @@ def all_i_loop_failed(CG):
     
 
 if  __name__=="__main__":
+    print("Criteria 4 - all 1 loop")
+    print("Control Graph is CG_PGCD")
+    print("\n")
     CG1=CG_PGCD()
     CG2=CG_PGCD()
     all_i_loop_passed(CG1)
+    print("\n")
     all_i_loop_failed(CG2)
     

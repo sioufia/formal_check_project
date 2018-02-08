@@ -62,12 +62,27 @@ def all_DU_paths(CG, T):
         print('Test passed')
         return True
 
-if  __name__=="__main__":
-    CG=CG_dumb_loop_simple()
+def all_DU_paths_passed(CG):
     T=[
         {'X':1},
         {'X':2},
         {'X':3}
     ]
-    print('Dumb Loop Simple')
+
     all_DU_paths(CG, T)
+
+def all_DU_paths_failed(CG):
+    T = [{'X':1}
+    ]
+
+    all_DU_paths(CG, T)
+
+if  __name__=="__main__":
+    print("Criteria 7 - all DU paths")
+    print("Control Graph is CG_Project_Example")
+    print("\n")
+    CG1=CG_dumb_loop_simple()
+    CG2=CG_dumb_loop_simple()
+    all_DU_paths_passed(CG1)
+    print("\n")
+    all_DU_paths_failed(CG2)

@@ -22,15 +22,32 @@ def all_decisions(CG,L,T):
     else:
         print('test passed')
 
-
-if __name__=="__main__":
-    Control_Graph = CG_Project_Example()
-    L = {(2, 4), (3, 4), (5, "exit"), (6, "exit")}
+def all_decisions_passed(CG):
     T = [
         {"X": -1},
         {"X": 2}
     ]
-    all_decisions(Control_Graph,L,T)
+    L = {(2, 4), (3, 4), (5, "exit"), (6, "exit")}
+
+    all_decisions(CG, L, T)
+
+def all_decisions_failed(CG):
+    T = [{'X':2}
+    ]
+    L = {(2, 4), (3, 4), (5, "exit"), (6, "exit")} 
+
+    all_decisions(CG, L, T)
+
+if __name__=="__main__":
+    print("Criteria 2 - all decisions")
+    print("Control Graph is CG_Project_Example")
+    print("\n")
+    CG1 = CG_Project_Example()
+    CG2 = CG_Project_Example()
+    all_decisions_passed(CG1)
+    print("\n")
+    all_decisions_failed(CG2)
+    
 
 
 

@@ -25,15 +25,32 @@ def all_assigned(CG,L,T):
     else:
         print('test passed')
         return True
-        
 
-if __name__=="__main__":
-    Control_Graph = CG_Project_Example()
-    L = [2,3,5,6]
+def all_assigned_passed(CG):
     T = [
     {'X':-1}, 
     {'X':1}, 
-    {'X':-1} 
     ]
-    all_assigned(Control_Graph, L, T)
+    L = [2,3,5,6]
+
+    all_assigned(CG, L, T)
+
+def all_assigned_failed(CG):
+    T = [{'X':-1}
+    ]
+    L = [2,3,5,6] 
+
+    all_assigned(CG, L, T)
+        
+
+if __name__=="__main__":
+    print("Criteria 1 - all assigned")
+    print("Control Graph is CG_Project_Example")
+    print("\n")
+    CG1 = CG_Project_Example()
+    CG2 = CG_Project_Example()
+    all_assigned_passed(CG1)
+    print("\n")
+    all_assigned_failed(CG2)
+    
 

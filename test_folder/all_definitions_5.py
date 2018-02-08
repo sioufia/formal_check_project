@@ -43,11 +43,26 @@ def all_definitions(CG, T):
 
     return True
 
+def all_definitions_passed(CG):
+    T = [
+    {'X':-1}, 
+    {'X':1}, 
+    ]
+
+    all_definitions(CG, T)
+
+def all_definitions_failed(CG):
+    T = [{'X':1}
+    ]
+
+    all_definitions(CG, T)
 
 if __name__ == "__main__":
-    CG = CG_Project_Example()
-    T = [
-        {'X': 1},
-        {'X':-1}
-    ]
-    all_definitions(CG, T)
+    print("Criteria 5 - all definitions")
+    print("Control Graph is CG_Project_Example")
+    print("\n")
+    CG1 = CG_Project_Example()
+    CG2 = CG_Project_Example()
+    all_definitions_passed(CG1)
+    print("\n")
+    all_definitions_failed(CG2)

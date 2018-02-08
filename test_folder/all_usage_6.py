@@ -63,22 +63,31 @@ def all_usages(CG,T):
         print('Test passed')
         return True
 
-
-if  __name__=="__main__":
-    CG=CG_Project_Example()
-    T=[
-        {'X':1},
-        {'X':-1},
-        {'X':-10}
-    ]
-    print('Project Example')
-    all_usages(CG,T)
-
-    CG=CG_Dumb()
+def all_usages_passed(CG):
     T=[
         {'X':100, 'Y':5},
         {'X':5, 'Y':100}
     ]
 
-    all_usages(CG,T)
+    all_usages(CG, T)
+
+def all_usages_failed(CG):
+    T=[
+        {'X':1},
+        {'X':-1},
+        {'X':-10}
+    ]
+
+    all_usages(CG, T)
+
+if  __name__=="__main__":
+    print("Criteria 6 - all usage")
+    print("\n")
+    print("Control Graph is CG_Project_Example")
+    CG1=CG_Project_Example()
+    all_usages_failed(CG1)
+    
+    print("Control Graph is CG_Dumb")
+    CG2=CG_Dumb()
+    all_usages_passed(CG2)
 

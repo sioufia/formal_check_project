@@ -24,12 +24,39 @@ def all_4_paths(CG,L,T):
         print('test passed')
         return True
 
-if __name__=="__main__":
-    Control_Graph = CG_Project_Example()
-    L = [[1, 2, 4, 5, "exit"], [1, 3, 4, 5, "exit"], [1, 2, 4, 6, "exit"], [1, 3, 4, 6, "exit"]]
+def all_4_paths_passed(CG):
     T = [
         {"X": -1},
         {"X": 2},
         {"X": -2}
     ]
-    all_4_paths(Control_Graph,L,T)
+    L = [
+        [1, 2, 4, 5, "exit"], 
+        [1, 3, 4, 5, "exit"], 
+        [1, 2, 4, 6, "exit"], 
+        [1, 3, 4, 6, "exit"]
+        ]
+
+    all_4_paths(CG, L, T)
+
+def all_4_paths_failed(CG):
+    T = [{"X": 2}
+    ]
+    L = [
+        [1, 2, 4, 5, "exit"], 
+        [1, 3, 4, 5, "exit"], 
+        [1, 2, 4, 6, "exit"], 
+        [1, 3, 4, 6, "exit"]
+        ] 
+
+    all_4_paths(CG, L, T)
+
+if __name__=="__main__":
+    print("Criteria 2 - all 4 paths")
+    print("Control Graph is CG_Project_Example")
+    print("\n")
+    CG1 = CG_Project_Example()
+    CG2 = CG_Project_Example()
+    all_4_paths_passed(CG1)
+    print("\n")
+    all_4_paths_failed(CG2)

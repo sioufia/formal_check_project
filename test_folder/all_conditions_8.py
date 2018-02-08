@@ -48,9 +48,13 @@ def all_conditions_failed(CG):
     all_conditions(CG, L, T)
 
 if __name__=="__main__":
-    Control_Graph1 = CG_Project_Example()
-    Control_Graph2 = CG_Project_Example()  
-    all_conditions_passed(Control_Graph1)
-    all_conditions_failed(Control_Graph2)
+    print("Criteria 1 - all assigned")
+    print("Control Graph is CG_Project_Example")
+    print("\n")
+    CG1 = CG_Project_Example()
+    CG2 = CG_Project_Example()  
+    all_conditions_passed(CG1)
+    print("\n")
+    all_conditions_failed(CG2)
 
     
