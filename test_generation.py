@@ -55,7 +55,7 @@ def test_generation(graph,path):
         cur_vert = previous_vert
 
     P = CSP(variables_domains)
-    print(variables_domains)
+
     for (x, y), constraints_x_y in constraints.items():
 
         P.addConstraint(x, y, constraints_x_y)
@@ -78,4 +78,7 @@ def possible_variables(variables_domains, constraints):
 
 if __name__=="__main__":
     CG=CG_Project_Example()
+
     print(test_generation(CG,[1,2,4,5,'exit']))
+
+    print(test_generation(CG,[1,2,4,6,'exit']))
