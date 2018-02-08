@@ -50,12 +50,14 @@ def test_generation(graph,path):
                 for var, value in possible_variable.items():
                     previous_variables_domains_2[var].add(value)
 
-        variables_domains = previous_variables_domains_1
+        variables_domains = previous_variables_domains_2
         cur_label = previous_label
         cur_vert = previous_vert
 
     P = CSP(variables_domains)
+    print(variables_domains)
     for (x, y), constraints_x_y in constraints.items():
+
         P.addConstraint(x, y, constraints_x_y)
 
     return P.solve()

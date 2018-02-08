@@ -2,7 +2,7 @@
 
 # 2018 - Ecole Centrale Supélec - c. dürr
 
-# Il s'agit du module de programmation par contraintes réalisés par notre professeur M. Dürr lors du cours d'optmisation.
+# Il s'agit du module de programmation par contraintes réalisé par notre professeur M. Dürr lors du cours d'optmisation.
 
 import sys
 
