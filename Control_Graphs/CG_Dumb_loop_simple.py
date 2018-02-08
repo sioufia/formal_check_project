@@ -1,3 +1,5 @@
+"""File that creates the CG_dumb_loop_simple control graph"""
+
 from control_graph import Graph, Vertice, Edge, apply_path
 from boolean_exp import Boolean_Exp
 from command_exp import Command_Exp

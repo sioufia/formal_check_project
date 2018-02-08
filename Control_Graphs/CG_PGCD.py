@@ -1,3 +1,5 @@
+"""File that creates the CG_PGCD control graph"""
+
 from control_graph import Graph, Vertice, Edge, Command_Exp, Boolean_Exp, apply_path
 
 

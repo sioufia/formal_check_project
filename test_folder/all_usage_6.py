@@ -1,3 +1,5 @@
+#Criteria 6
+
 import sys
 sys.path.insert(0,sys.path[0][:len(sys.path[0])-12])
 
@@ -8,6 +10,12 @@ from Control_Graphs.CG_Dumb import CG_Dumb
 from control_graph import apply_path, find_vertice_with_label, Graph
 
 def all_usages(CG,T):
+    """The arguments are a control graph (CG), and a data set of variables(T). 
+    The list of elements named couples_to_visit is a list of tuple (def,ref) with 
+    def a vertice with assignement of a variable and ref a vertice with a 
+    reference of this variable . This test checks if each tuple are visited without
+    a redefinition between both.
+    It checks if the criteria all_usages is validated."""
     couples_to_visit = []
     couples_not_visited = []
     for var in CG.var:
@@ -53,7 +61,6 @@ def all_usages(CG,T):
 
     else:
         print('Test passed')
-        #CG.coverage_criteria(T)
         return True
 
 

@@ -8,7 +8,9 @@ from Control_Graphs.CG_Project_Example import CG_Project_Example
 from control_graph import apply_path, find_vertice_with_label, Graph
 
 def all_conditions(CG, L, T):
-    #L:list of the paths ; T: data set ; apply_path is a path for a specific prog
+    """The arguments are a control graph (CG), the list of paths that should 
+    be visited to validate the criteria (L),and a data set of variables(T). It 
+    checks if the criteria all_conditions is validated."""
     to_visit = list(L)
     not_visited = list(L)
     for t in T:
@@ -20,12 +22,11 @@ def all_conditions(CG, L, T):
         print('test failed')
     else:
         print('test passed')
-        #CG.coverage_criteria(T)
 
 
 
 def all_conditions_passed(CG):
-
+    """A specific data set that validates the criteria"""
     T = [
         {'X':-1},
         {'X':10}
@@ -36,6 +37,7 @@ def all_conditions_passed(CG):
     all_conditions(CG, L, T)
 
 def all_conditions_failed(CG):
+    """A specific data set that invalidates the criteria"""
     #A requirement to pass the test is to have X=-1 as initial value
     T = [
         {'X':-5}

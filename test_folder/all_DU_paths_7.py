@@ -1,3 +1,5 @@
+#Criteria 7
+
 import sys
 sys.path.insert(0,sys.path[0][:len(sys.path[0])-12])
 
@@ -7,6 +9,12 @@ from Control_Graphs.CG_Dumb_loop_simple import CG_dumb_loop_simple
 from control_graph import apply_path, find_vertice_with_label, Graph
 
 def all_DU_paths(CG, T):
+    """The arguments are a control graph (CG), and a data set of variables(T). 
+    The list of elements named path_to_visit is a list of simple partial path 
+    where there is a definition vertice and reference vertice of a variable 
+    without redefinition between both vertices. This test checks if each path
+    is visited at least once.
+    It checks if the criteria all_DU_paths is validated."""
     path_to_visit = []
     path_not_visited = []
     for var in CG.var:
@@ -52,7 +60,6 @@ def all_DU_paths(CG, T):
     
     else:
         print('Test passed')
-        #CG.coverage_criteria(T)
         return True
 
 if  __name__=="__main__":

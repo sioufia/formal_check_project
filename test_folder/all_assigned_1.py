@@ -7,6 +7,9 @@ from control_graph import apply_path, find_vertice_with_label, Graph
 
 
 def all_assigned(CG,L,T):
+    """The arguments are a control graph (CG), the list of vertices that should 
+    be visited to validate the criteria (L),and a data set of variables(T). It 
+    checks if the criteria all_assigned is validated."""
     to_visit = L
     not_visited = list(L)
     for t in T:
@@ -21,7 +24,6 @@ def all_assigned(CG,L,T):
         return False
     else:
         print('test passed')
-        #CG.coverage_criteria(T)
         return True
         
 

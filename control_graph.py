@@ -1,3 +1,4 @@
+"""File that enables the construction of Control Graph from a WHILE program"""
 import re
 
 from boolean_exp import Boolean_Exp
@@ -33,6 +34,7 @@ class Graph:
         return res
 
     def path(self, variables):
+        """Functions that gives the path took by the program for a specific variable"""
         new_variables=dict(variables)
         visited = []
         current_vertice = self.vertices[0]  # First vertice
@@ -49,30 +51,11 @@ class Graph:
         #path is a list of set
         self.simple_partial_paths[couple] = path
 
-    def coverage_criteria(self, T):
-        """It calculates the ratio between the number of vertices visited and the number total
-        of vertices"""
-        #T is a dataset 
-        for variables in T:
-            p = self.path(variables)[0]
-            for elt in p:
-                if elt not in self.visited_from_data_set:
-                    self.visited_from_data_set.append(elt)
-        
-        nb_vertices = len(self.vertices)
-        if nb_vertices != 0:
-            vertices_label = [x.label for x in self.vertices]
-            print("Coverage : {}".format(len(self.visited_from_data_set)/nb_vertices ))
-            print("Vertices of the graph: {}".format(str(vertices_label)))
-            print("Vertices visited : {}".format(str(self.visited_from_data_set)))
-        else:
-            raise ValueError("No vertices in this data set")
-
     @staticmethod
     def coverage_criteria2(to_visit, type_numerator, numerator):
         """It calculates the ratio between the elements that have been visited and the all the elements of the criteria
         that should be visited
-        - to_visit is a list of the elements that cover the criteria
+        - to_visit is a list of the elements that covers the criteria
         - not_visited is a list of the elements from to_visit that have not been visited
         """
         if to_visit:
@@ -119,6 +102,7 @@ class Edge:
 
 
 def apply_path(CG, variables):
+    """It returns the path of control graph for specific variables"""
     return CG.path(variables)
 
 

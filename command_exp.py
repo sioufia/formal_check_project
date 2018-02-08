@@ -1,4 +1,7 @@
+"""File containing the class representing the command expression"""
+
 class Command_Exp:
+    #need to specify a type of command in order to use it with some criterias
     TYPES=["skip","assign"]
 
     @staticmethod

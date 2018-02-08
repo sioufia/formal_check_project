@@ -8,7 +8,9 @@ from Control_Graphs.CG_PGCD import CG_PGCD
 from control_graph import apply_path, Graph
 
 def all_i_loop(CG, L, T):
-    #L:list of the paths ; T: data set ; apply_path is a path for a specific prog
+    """The arguments are a control graph (CG), the list of paths that should 
+    be visited to validate the criteria (L),and a data set of variables(T). It 
+    checks if the criteria all_assigned is validated."""
     to_visit = list(L)
     not_visited = list(L)
     for t in T:
@@ -21,11 +23,11 @@ def all_i_loop(CG, L, T):
         print('test failed')
     else:
         print('test passed')
-        #CG.coverage_criteria(T)
 
 
 
 def all_i_loop_passed(CG):
+    """A specific data set that validates the criteria"""
 
     T = [
         {'X':10,'Y':5},
@@ -37,6 +39,7 @@ def all_i_loop_passed(CG):
     all_i_loop(CG, L, T)
 
 def all_i_loop_failed(CG):
+    """A specific data set that invalidates the criteria"""
     #It fails for i = 1 if X is always the douple of Y
     T = [
         {'X':30,'Y':15},

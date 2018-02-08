@@ -1,3 +1,5 @@
+#Criteria 2
+
 import sys
 sys.path.insert(0,sys.path[0][:len(sys.path[0])-12])
 
@@ -5,6 +7,9 @@ from Control_Graphs.CG_Project_Example import CG_Project_Example
 from control_graph import apply_path, find_vertice_with_label, Graph
 
 def all_decisions(CG,L,T):
+    """The arguments are a control graph (CG), the list of edges that should 
+    be visited to validate the criteria (L),and a data set of variables(T). It 
+    checks if the criteria all_decisions is validated."""
     to_visit = list(L)
     visited = set()
     for t in T:
@@ -16,7 +21,6 @@ def all_decisions(CG,L,T):
         print('test failed')
     else:
         print('test passed')
-        #CG.coverage_criteria(T)
 
 
 if __name__=="__main__":

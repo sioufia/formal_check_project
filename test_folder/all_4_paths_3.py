@@ -1,10 +1,14 @@
+#Criteria 3
 import sys
 sys.path.insert(0,sys.path[0][:len(sys.path[0])-12])
 
 from Control_Graphs.CG_Project_Example import CG_Project_Example
 from control_graph import apply_path, Graph
 
-def test(CG,L,T):
+def all_4_paths(CG,L,T):
+    """The arguments are a control graph (CG), the list of paths that should 
+    be visited to validate the criteria (L),and a data set of variables(T). It 
+    checks if the criteria all_decisions is validated."""
     to_visit = list(L)
     not_visited = list(L)
     for t in T:
@@ -18,7 +22,6 @@ def test(CG,L,T):
         return False
     else:
         print('test passed')
-        #CG.coverage_criteria(T)
         return True
 
 if __name__=="__main__":
@@ -29,4 +32,4 @@ if __name__=="__main__":
         {"X": 2},
         {"X": -2}
     ]
-    test(Control_Graph,L,T)
+    all_4_paths(Control_Graph,L,T)

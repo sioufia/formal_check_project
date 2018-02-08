@@ -1,3 +1,5 @@
+"""File containing the class representing the boolean expression"""
+
 class Boolean_Exp:
     def __init__(self,evaluation, representation):
         self.evaluation=evaluation
