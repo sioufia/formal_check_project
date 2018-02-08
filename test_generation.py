@@ -16,6 +16,8 @@ def test_generation(graph,path):
 
     variables_domains = {}  # de la forme : variables_domains['X']={1,2,3}
     variable_names = list(variables_domains.keys())
+
+    # Larger Domain possible
     general_domain = set(range(-10, 11))
     for var in graph.var:
         variables_domains[var] = set(general_domain)
@@ -26,7 +28,10 @@ def test_generation(graph,path):
     cur_label = next(iter_path)
     cur_vert = find_vertice_with_label(graph, cur_label)
 
+    # How compute each label from the given path in reverse
     for previous_label in iter_path:
+
+        # Corresponding vertice to the label
         previous_vert = find_vertice_with_label(graph, previous_label)
 
         # edge from previous vert to cur_vert
@@ -42,7 +47,10 @@ def test_generation(graph,path):
             for var, value in previous_variables.items():
                 previous_variables_domains_1[var].add(value)
 
-        # Apply reverse condition on the edge
+        # We now have an intermediary variables domains
+        # Always going backward in our symbolic execution
+        # We apply reverse condition on the edge
+
         condition = edge.condition
         previous_variables_domains_2 = defaultdict(set)
         for possible_variable in possible_variables(previous_variables_domains_1, constraints):
@@ -50,21 +58,26 @@ def test_generation(graph,path):
                 for var, value in possible_variable.items():
                     previous_variables_domains_2[var].add(value)
 
+        # We assign the variables domains with the expected variables domain computed
         variables_domains = previous_variables_domains_2
+
+        # We move one step backward
         cur_label = previous_label
         cur_vert = previous_vert
 
+    # Our Constraint Problem
     P = CSP(variables_domains)
 
+    # We add to the probelm binary constraint
     for (x, y), constraints_x_y in constraints.items():
-
         P.addConstraint(x, y, constraints_x_y)
 
+    # We return the solution of our problem
     return P.solve()
 
 
 def possible_variables(variables_domains, constraints):
-    """Sort la liste des états (variables) possibles"""
+    """compute the possible values of our variables in a given state and a set of constraints"""
     result = []
     variable_names = list(variables_domains.keys())
     for possible_values in product(*(variables_domains.values())):
