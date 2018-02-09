@@ -19,6 +19,7 @@ that validate the criteria for a specific program.
 
 - ./test_generation.py : the automatic generation of data set that validate a critera for a specific WHILE programm. 
 Currently it finds the data set for a programm with only one variable.
+To take into account multiple variables, we could use the package constraint from python.
 
 - ./constraint_programming.py : a solver made by Professor Dürr during the class of Optimization
 
@@ -42,3 +43,13 @@ validate the criterias.
     - ./test_folder/all_usage_6.py : 6th criteria
     - ./test_folder/all_DU_paths_7.py : 7th criteria
     - ./test_folder/all_conditions_8.py : 8th criteria
+
+# STEPS TO RUN THE CRITERIAS:
+    1/ Go to the folder ./test_folder
+    2/ Launch the file corresponding to the criteria
+    you want : python <name_of_file>
+    For each file there are :
+        - 1 passed test (with a control graph and a dataset)
+        - 1 failed test (with a control graph and a dataset)
+        - 1 generation of dataset for the criteria (only for criterias 
+        1,2,3 and 8)
