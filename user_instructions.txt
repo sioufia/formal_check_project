@@ -1,4 +1,4 @@
-Steps to run the criterias with manual generation data:
+Steps to run the criterias:
     1/ Go to the folder ./test_folder
     2/ Launch the file corresponding to the criteria
     you want : python <name_of_file>
