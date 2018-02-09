@@ -92,6 +92,9 @@ class Vertice:
             self.refv |= set(re.findall(r'[a-zA-Z]+', new_edge.command.representation)[1:])
         self.refv |= set(re.findall(r'[a-zA-Z]+', new_edge.condition.representation))
         self.refv -= set(["true", "false", "not"])
+        #print('ref' + str(self.refv))
+        #print('def' + str(self.defv))
+        #print (str(self.label) + str(self.defv) + str(self.refv))
 
 
 class Edge:

@@ -26,7 +26,7 @@ def CG_Dumb():
         return variables
 
     C2 = Command_Exp(fun_2, "Y:=X+1",type="assign")
-    V2.add_next_edge(Edge(B_True, C_skip, "exit"))
+    V2.add_next_edge(Edge(B_True, C2, "exit"))
 
     Vexit = Vertice("exit")
     Control_Graph = Graph([V1, V2, Vexit])

@@ -1,4 +1,5 @@
 #Criteria 6
+#Not working
 
 import sys
 sys.path.insert(0,sys.path[0][:len(sys.path[0])-12])
@@ -16,8 +17,8 @@ def all_usages(CG,T):
     reference of this variable . This test checks if each tuple are visited without
     a redefinition between both.
     It checks if the criteria all_usages is validated."""
-    couples_to_visit = []
-    couples_not_visited = []
+    couples_to_visit = list()
+    couples_not_visited = list()
     for var in CG.var:
         vert_var_in_defv=set()
         vert_var_in_refv=set()
@@ -26,33 +27,24 @@ def all_usages(CG,T):
                 vert_var_in_defv.add(vert.label)
             elif var in vert.refv:
                 vert_var_in_refv.add(vert.label)
-        #print(vert_var_in_defv)
-        #print(vert_var_in_refv)
         couples = product(vert_var_in_defv, vert_var_in_refv)
-        couples_to_visit += couples
-        couples_not_visited += couples
-        print(couples_to_visit)
+        couples_to_visit += list(couples)
+        couples_not_visited += list(couples_to_visit)
         for t in T:
             path,variables=apply_path(CG,t)
-            for vert_def, vert_ref in couples:
+            for vert_def, vert_ref in couples_not_visited:
                 vert_def_found = False
-                for vert in path:
+                for vert_label in path:
+                    vert = find_vertice_with_label(CG, vert_label)
                     if vert_def == vert.label:
-                        vert_found = True
+                        vert_def_found = True
 
-                    elif vert_ref == vert.label and vert_found:
+                    elif vert_ref == vert.label and vert_def_found:
                         couples_not_visited.remove((vert_def, vert_ref))
                         break
                     
-                    elif vert_ref != vert.label and var in vert.refv:
+                    elif vert_ref != vert.label and var in vert.refv and vert_def_found:
                         break
-                        #print('Test failed')
-                        #return False
-        
-        #if couples_not_visited:
-            #print('Test failed')
-            #print(couples_remaining, var)
-            #return False
 
     Graph.coverage_criteria2(couples_to_visit, "not_visited", couples_not_visited)
     if couples_not_visited:
@@ -77,7 +69,6 @@ def all_usages_failed(CG):
         {'X':-1},
         {'X':-10}
     ]
-
     all_usages(CG, T)
 
 if  __name__=="__main__":
